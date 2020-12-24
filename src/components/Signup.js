@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Signup.scss";
 import Profile from "../components/Profile"
+import Skills from "../components/Skills"
 const Signup = (props) => {
   // const [pTextVisibility, setPTextVisibility] = useState(false);
   const [email, setEmail] = useState("");
@@ -68,7 +69,7 @@ const Signup = (props) => {
       });
     });
     const newToken = JSON.parse(localStorage.getItem("login"));
-    console.log(newToken.accessToken, "this is token");
+    //console.log(newToken.accessToken, "this is token");
     fetch("https://be.bhyve-app.com:3020/user/profile", {
       method: "GET",
       headers: {
@@ -147,7 +148,7 @@ const Signup = (props) => {
                 ></input>
                 <br />
                 <br />
-                <button type="Submit" onClick={LoginFormSubmit}>
+                <button type="submit" onClick={LoginFormSubmit}>
                   Log in
                 </button>
               </form>
@@ -169,7 +170,11 @@ const Signup = (props) => {
       );
     case 1:
       return (
-        <Profile state={step}/>
+        <Profile step={step} setStep={setStep}/>
+      )
+      case 2:
+      return (
+        <Skills step={step} setStep={setStep}/>
       )
     default:
       <h1>Page Not Found</h1>
