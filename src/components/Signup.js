@@ -8,6 +8,7 @@ const Signup = () => {
   const [password2, setPassword2] = useState(null);
   const [code, setCode] = useState(0);
   const [login, setLogin] = useState(false);
+  //const [token, setToken] = useState(null);
   //console.log(email,password,password2);
 
   function SignupFormSubmit(e) {
@@ -28,9 +29,10 @@ const Signup = () => {
           console.log("ok", data);
           setLogin(true);
         } else {
-          console.log("err");
+          setCode(data.status);
+          console.log("err",data);
         }
-      });
+      }).catch(err => {console.log(err, "Error")})
   }
   if (code === 400) {
     alert("Invalid Input");
@@ -39,71 +41,110 @@ const Signup = () => {
     alert("Email Already Exists");
     window.location.reload();
   }
+  ///////Sign up Form end
+  ///////Log In Form
+  function LoginFormSubmit(e) {
+    e.preventDefault();
+    fetch("https://be.bhyve-app.com:3020/user/signin", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        username: email,
+        password: password,
+      }),
+    }).then(res => {
+      res.json().then(data => {
+        //console.log("data",data)
+        localStorage.setItem(
+          "login",
+          JSON.stringify({
+            // login: true,
+            accessToken: data.accessToken,
+          })
+        );
+      });
+    });
+    const newToken = JSON.parse(localStorage.getItem("login"));
+    console.log(newToken.accessToken, "this is token");
+    fetch("https://be.bhyve-app.com:3020/user/profile", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + newToken.accessToken,
+      },
+    }).then(res =>
+      res.json().then(data => {
+        console.log("yes",data);
+      })
+    );
+  }
+  ///////Log In
   return (
     <section id="Signup">
       <div className="form-wrapper">
         {console.log(login)}
-      {login === false ? <form className="form" onSubmit={SignupFormSubmit}>
-          <label>Sign Up</label>
-          <input
-            type="email"
-            placeholder="E-mail"
-            onChange={e => setEmail(e.target.value)}
-            required
-          ></input>
-          <br />
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            className="signup-password"
-            // onClick={() => setPTextVisibility(true)}
-            onChange={e => setPassword(e.target.value)}
-          ></input>
-          <br />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            required
-            //onClick={() => setPTextVisibility(false)}
-            onChange={e => setPassword2(e.target.value)}
-          ></input>
-          <br />
-          <button
-            type="Submit"
-            onClick={password === password2 && email ? SignupFormSubmit : null}
-          >
-            Sign Up
-          </button>
-        </form>
-        :
-        <form className="form" onSubmit={SignupFormSubmit}>
-          <label>Sign In</label>
-          <input
-            type="email"
-            placeholder="E-mail"
-            onChange={e => setEmail(e.target.value)}
-            required
-          ></input>
-          <br />
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            className="signup-password"
-            // onClick={() => setPTextVisibility(true)}
-            onChange={e => setPassword(e.target.value)}
-          ></input>
-          <br />
-          <br />
-          <button
-            type="Submit"
-            onClick={password === password2 && email ? SignupFormSubmit : null}
-          >
-            Log in
-          </button>
-        </form>
-        }
+        {login === false ? (
+          <form className="form" onSubmit={SignupFormSubmit}>
+            <label>Sign Up</label>
+            <input
+              type="email"
+              placeholder="E-mail"
+              onChange={e => setEmail(e.target.value)}
+              required
+            ></input>
+            <br />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              className="signup-password"
+              // onClick={() => setPTextVisibility(true)}
+              onChange={e => setPassword(e.target.value)}
+            ></input>
+            <br />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              required
+              //onClick={() => setPTextVisibility(false)}
+              onChange={e => setPassword2(e.target.value)}
+            ></input>
+            <br />
+            <button
+              type="Submit"
+              onClick={
+                password === password2 && email ? SignupFormSubmit : null
+              }
+            >
+              Sign Up
+            </button>
+          </form>
+        ) : (
+          <form className="form" onSubmit={LoginFormSubmit}>
+            <label>Sign In</label>
+            <input
+              type="email"
+              placeholder="E-mail"
+              onChange={e => setEmail(e.target.value)}
+              required
+            ></input>
+            <br />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              className="signup-password"
+              // onClick={() => setPTextVisibility(true)}
+              onChange={e => setPassword(e.target.value)}
+            ></input>
+            <br />
+            <br />
+            <button type="Submit" onClick={LoginFormSubmit}>
+              Log in
+            </button>
+          </form>
+        )}
       </div>
       <div className="signup-errorText-wrapper">
         <ul className="signup-errorText-wrapper-ul">
