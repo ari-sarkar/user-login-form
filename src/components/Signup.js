@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import "../styles/Signup.scss";
 import Profile from "../components/Profile"
 import Skills from "../components/Skills"
+import { useSelector, useDispatch } from "react-redux"
+import incrementStep from "../components/actions/incrementStep"
 const Signup = (props) => {
-  // const [pTextVisibility, setPTextVisibility] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState(null);
   const [code, setCode] = useState(0);
   const [login, setLogin] = useState(false);
-  const [step, setStep] = useState(0);
-  //const [token, setToken] = useState(null);
-  //console.log(email,password,password2);
-
+  //const [step, setStep] = useState(0);
+///////REDUX START
+const step = useSelector(state => state.step)
+const dispatch = useDispatch()
+///////REDUX END
   function SignupFormSubmit(e) {
     e.preventDefault();
     fetch("https://be.bhyve-app.com:3020/user/signup/", {
@@ -78,7 +80,7 @@ const Signup = (props) => {
     }).then(res =>
       res.json().then(data => {
         console.log("yes",data);
-        setStep(step + 1);
+        dispatch(incrementStep())
       })
     );
   }
@@ -170,11 +172,11 @@ const Signup = (props) => {
       );
     case 1:
       return (
-        <Profile step={step} setStep={setStep}/>
+        <Profile/>
       )
       case 2:
       return (
-        <Skills step={step} setStep={setStep}/>
+        <Skills/>
       )
     default:
       <h1>Page Not Found</h1>
