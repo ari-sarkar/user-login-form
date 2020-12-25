@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import "../styles/Profile.scss";
-import { useSelector , useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import incrementStepTwo from "../components/actions/incrementStep2"
 function Profile() {
   ///////REDUX START
-const step = useSelector(state => state.step)
+//const step = useSelector(state => state.step)
 const dispatch = useDispatch()
 ///////REDUX END
   const [firstName, SetFirstName] = useState(null);
   const [lastName, SetLastName] = useState(null);
-
   const ProfileSubmit = e => {
     e.preventDefault();
     const newToken = JSON.parse(localStorage.getItem("login"));
@@ -26,7 +25,7 @@ const dispatch = useDispatch()
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data.statusCode, "data");
+        console.log(data, "data");
         if(data.statusCode === undefined){
           dispatch(incrementStepTwo())
         }
