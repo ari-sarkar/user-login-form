@@ -173,11 +173,11 @@ const dispatch = useDispatch()
       );
     case 1:
       return (
-        <Profile/>
+        <Profile />
       )
       case 2:
       return (
-        <Skills/>
+        <Skills />
       )
       case 3:
       return (

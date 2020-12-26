@@ -1,45 +1,6 @@
-#skills{
-    overflow-x: hidden;
-    .skil-container{
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        background-color: rgb(80, 80, 80);
-        justify-content: center;
-        align-items: center;
-        width: 100vw;
-        height: 100%;
-        padding: 10px;
-    }
-}
-.skill{
-    background-color: rgb(13, 136, 218);
-    width: 80%;
-    height: 10rem;
-    margin-top: 80px;
-    margin-bottom: 80px;
-    padding-right: 15px;
-    color: whitesmoke;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.3em;
-    border-radius: 18px;
-}
-.selectedskills{
-    //background-color: bisque;
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -35%);
-    z-index: 10;
-    width: 80%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    p{
-        font-size: 1.5em;
-        color: whitesmoke;
+#demo{
+    background-color: black;
+    .table{
+        background-color: blue;
     }
 }

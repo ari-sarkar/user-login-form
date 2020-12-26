@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
-import "primeicons/primeicons.css";
+import "../styles/Skills.scss"
+//import "primeicons/primeicons.css";
 import StoreSkills from "../components/StoreSkills"
 const Demo = ({ items }) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const individualItem = items.map(item => item);
+
   //console.log(individualItem)
   //console.log(selectedCustomers)
   const paginatorLeft = (
@@ -16,11 +18,21 @@ const Demo = ({ items }) => {
   const paginatorRight = (
     <button type="button" icon="pi pi-cloud" className="p-button-text" />
   )
+ 
   //console.log(selectedCustomers[0].id)
+
+const nameBodyTemplate = (rowData) => {
   return (
-    <div style={{ zIndex: 20 }}>
+      <React.Fragment>
+          {rowData.name}
+      </React.Fragment>
+  );
+}
+
+///////////////////////////////////////////////////////
+  return (
+    <div id="demo" style={{ zIndex: 20 }}>
       <DataTable
-        selectionMode={"multiple"}
         selection={selectedCustomers}
         onSelectionChange={e => setSelectedCustomers(e.value)}
         value={
@@ -41,8 +53,8 @@ const Demo = ({ items }) => {
         paginatorLeft={paginatorLeft}
         paginatorRight={paginatorRight}
       >
+         <Column field="skillName"  body={nameBodyTemplate} filter filterPlaceholder="Search by name" />
         <Column selectionMode={"multiple"} style={{ width: "3em" }} />
-        <Column field="id" header="id"></Column>
         <Column field="skillName" header="skillName"></Column>
       </DataTable>
       <StoreSkills selectedCustomers={selectedCustomers}/>
