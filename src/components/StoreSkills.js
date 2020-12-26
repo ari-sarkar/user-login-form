@@ -1,18 +1,46 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { useDispatch } from "react-redux"
+import incrementStep3 from "../components/actions/incrementStep3"
+const StoreSkills = ( {selectedCustomers} ) => {
+    //console.log(selectedCustomers)
+    const skillName = selectedCustomers.map(item => item.skillName)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        const submitSkills = () => {
+            const newToken = JSON.parse(localStorage.getItem("login"));
 
-const StoreSkills = ( { Id, data, items }) => {
-//     let b = items.map(item => item.skillName);
-//     let c = items.map(item => item.id);
-//     //let c = items.map(item => item.id);
-//     for (let i = 0; i < b.length; i++) {
-//       if (b[i].toLowerCase() === data.toLowerCase()) {
-//         console.log(c[i])
-//        console.log(data)
-//    }
-//}
-let skillsid= items.map(item=> item.id)
+            // axios.post('/user', {
+            //     firstName: 'Fred',
+            //     lastName: 'Flintstone'
+            //   })
+            //   .then(function (response) {
+            //     console.log(response);
+            //   })
+            //   .catch(function (error) {
+            //     console.log(error);
+            //   });
 
-console.log(skillsid)
+             axios.post(
+            'https://be.bhyve-app.com:3020/user/skills',
+            {
+                skills: {skillName}
+            },
+             {
+                headers: { "Content-Type": "application/json",
+                 Authorization: "Bearer " + newToken.accessToken,}
+             }
+            )
+            .then(res => {
+                console.log(res,"response")
+                dispatch(incrementStep3())
+            })
+            .catch(err => console.log(err,"error"))
+             
+            //console.log(reasult.data)
+        };
+        submitSkills();
+      }, [selectedCustomers,skillName,dispatch]);
     return (
         <div>
             

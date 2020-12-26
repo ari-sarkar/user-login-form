@@ -4,6 +4,8 @@ const step =(state =0, action) => {
             return state + 1;
             case "two":
                 return state + 1;
+                case "three":
+                return state + 1;
             default:
                 return state
     }

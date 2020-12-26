@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/Signup.scss";
 import Profile from "../components/Profile"
 import Skills from "../components/Skills"
+import UserProfile from "../components/UserProfile"
 import { useSelector, useDispatch } from "react-redux"
 import incrementStep from "../components/actions/incrementStep"
 const Signup = (props) => {
@@ -177,6 +178,10 @@ const dispatch = useDispatch()
       case 2:
       return (
         <Skills/>
+      )
+      case 3:
+      return (
+        <UserProfile />
       )
     default:
       <h1>Page Not Found</h1>
