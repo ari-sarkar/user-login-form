@@ -25,7 +25,7 @@ const StoreSkills = ({ selectedCustomers, isclicked }) => {
         .post(
           "https://be.bhyve-app.com:3020/user/skills",
           {
-            skills: { skillName },
+            skills:  skillName ,
           },
           {
             headers: {
@@ -43,9 +43,11 @@ const StoreSkills = ({ selectedCustomers, isclicked }) => {
         .catch(err => console.log(err, "error"));
 
       //console.log(reasult.data)
+      console.log(skillName,"from ")
     };
     submitSkills();
   }, [selectedCustomers, dispatch,isclicked]);
+  
   return <div></div>;
 };
 

@@ -36,7 +36,7 @@ setisclicked(false)
   return (
     <div className="skills-container">
       <div className="skills-wrapper">
-      <button className= {selectedCustomers.length > 2 && selectedCustomers.length < 10 ? "submit-btn":"submit-btn disabled"} onClick={selectedCustomers.length > 2 && selectedCustomers.length < 10 ? handleClick: null}>Submit</button>
+      <button className= {selectedCustomers.length > 2 && selectedCustomers.length < 11 ? "submit-btn":"submit-btn disabled"} onClick={selectedCustomers.length > 2 && selectedCustomers.length < 11 ? handleClick: null}>Submit</button>
         <DataTable
           className="p-jc-start"
           selection={selectedCustomers}
@@ -68,38 +68,3 @@ setisclicked(false)
 };
 
 export default Demo;
-
-// import React, { useState } from "react";
-// import { AutoComplete } from "primereact/autocomplete";
-// const Demo = ({ items }) => {
-//   const [selectedCountry, setselectedCountry] = useState(null);
-//   const [filteredCountries, setfilteredCountries] = useState(null);
-//   let countries;
-//   countries = [items.map(item => item.skillName)];
-//   const searchCountry = e => {
-//     setTimeout(() => {
-//       let filteredCountries;
-//       if (!e.query.trim().length) {
-//         filteredCountries = countries;
-//       } else {
-//         filteredCountries = countries.filter(country => {
-//           return country.name.toLowerCase().startsWith(e.query.toLowerCase());
-//         });
-//       }
-
-//       setfilteredCountries({ filteredCountries });
-//     }, 250);
-//   };
-//   return (
-//     <div>
-//       <AutoComplete
-//         value={selectedCountry}
-//         suggestions={filteredCountries}
-//         completeMethod={searchCountry}
-//         onChange={e => setselectedCountry({ selectedCountry: e.value })}
-//       />
-//     </div>
-//   );
-// };
-
-// export default Demo;

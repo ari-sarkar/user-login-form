@@ -9,17 +9,12 @@ const Skills = () => {
       const reasult = await axios(
         `https://be.bhyve-app.com:3020/skills`
       );
-      //This shuold automaticaly filter the skills but for some reason not working
       setitems(reasult.data);
-      //console.log(reasult.data)
-      //console.log(query)
     };
     fetchSkills();
   }, []);
   return (
     <div>
-      {/* <Search getquery={val => setquery(val)} items={items} />
-      <SkillList items={items} loading={loading} /> */}
       <Demo items={items}/>
     </div>
   );
