@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import incrementStep3 from "../components/actions/incrementStep3";
-const StoreSkills = ({ selectedCustomers }) => {
-  //console.log(selectedCustomers)
+const StoreSkills = ({ selectedCustomers, isclicked }) => {
+  console.log(isclicked)
   const dispatch = useDispatch();
   useEffect(() => {
     const submitSkills = () => {
@@ -36,7 +36,7 @@ const StoreSkills = ({ selectedCustomers }) => {
         )
         .then(res => {
           console.log(res, "response");
-         if(skillName.length > 2 && skillName.length < 11){
+         if(!isclicked){
             dispatch(incrementStep3())
          }
         })
@@ -45,7 +45,7 @@ const StoreSkills = ({ selectedCustomers }) => {
       //console.log(reasult.data)
     };
     submitSkills();
-  }, [selectedCustomers, dispatch]);
+  }, [selectedCustomers, dispatch,isclicked]);
   return <div></div>;
 };
 

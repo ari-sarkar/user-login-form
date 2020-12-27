@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/Profile.scss";
 import { useDispatch } from "react-redux"
 import incrementStepTwo from "../components/actions/incrementStep2"
+import 'primeflex/primeflex.css';
 function Profile() {
   ///////REDUX START
 //const step = useSelector(state => state.step)

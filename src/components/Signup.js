@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "../styles/Signup.scss";
 import Profile from "../components/Profile"
-import Skills from "../components/Skills"
 import UserProfile from "../components/UserProfile"
 import { useSelector, useDispatch } from "react-redux"
 import incrementStep from "../components/actions/incrementStep"
+import Skills from "../components/Skills"
 const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -71,7 +71,8 @@ const dispatch = useDispatch()
         );
       });
     });
-    const newToken = JSON.parse(localStorage.getItem("login"));
+    let newToken = ""
+    newToken = JSON.parse(localStorage.getItem("login"));
     //console.log(newToken.accessToken, "this is token");
     fetch("https://be.bhyve-app.com:3020/user/profile", {
       method: "GET",
@@ -175,8 +176,8 @@ const dispatch = useDispatch()
       return (
         <Profile />
       )
-      case 2:
-      return (
+      case 2: 
+      return(
         <Skills />
       )
       case 3:

@@ -1,0 +1,29 @@
+.skills-container {
+    width: 60vw;
+    margin: auto;
+    height: 100vh;
+    position: relative;
+    .skills-wrapper{
+        width: 80%;
+        height: 100%;
+        .submit-btn{
+            z-index: 100;
+            position: absolute;
+            bottom: 10%;
+            right: 0;
+            width: 120px;
+            height: 3rem;
+            border-radius: 12px;
+            outline: none;
+            border: transparent;
+            background-color: rgb(2, 204, 255);
+            color: whitesmoke;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .disabled {
+            background-color: gray;
+            cursor: not-allowed
+        }
+    }
+}
